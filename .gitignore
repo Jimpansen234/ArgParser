@@ -1,0 +1,8 @@
+obj/
+dep/
+bin/
+*.o
+*.d
+*.swp
+compile_commands.json
+
