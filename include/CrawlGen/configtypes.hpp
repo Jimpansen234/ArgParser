@@ -1,5 +1,5 @@
-#ifndef CGCONFIGTYPES_HPP
-#define CGCONFIGTYPES_HPP
+#ifndef CRAWLGEN_CONFIGTYPES_HPP
+#define CRAWLGEN_CONFIGTYPES_HPP
 
 namespace CrawlGen {
     

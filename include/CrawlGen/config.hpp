@@ -1,9 +1,10 @@
-#ifndef CGCONFIG_HPP
-#define CGCONFIG_HPP
+#ifndef CRAWLGEN_CONFIG_HPP
+#define CRAWLGEN_CONFIG_HPP
 
 #include <vector>
 #include <string>
-#include "CrawlGen/configtypes.hpp"
+
+#include <CrawlGen/configtypes.hpp>
 
 namespace CrawlGen {
 
