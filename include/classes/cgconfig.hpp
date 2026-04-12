@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <string>
-#include "cgconfigtypes.hpp"
+#include "types/cgconfigtypes.hpp"
 
 namespace cg {
 
