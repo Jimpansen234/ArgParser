@@ -3,9 +3,9 @@
 
 #include <vector>
 #include <string>
-#include "types/cgconfigtypes.hpp"
+#include "CrawlGen/configtypes.hpp"
 
-namespace cg {
+namespace CrawlGen {
 
     class Config {
         private:

@@ -1,7 +1,7 @@
 #ifndef CGCONFIGTYPES_HPP
 #define CGCONFIGTYPES_HPP
 
-namespace cg {
+namespace CrawlGen {
     
     enum class Compilertype {
         GCC,
