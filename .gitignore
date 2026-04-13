@@ -1,8 +1,13 @@
+# build folders
+asm/
 obj/
 dep/
+out/
 bin/
+
+# junk prevention
 *.o
 *.d
 *.swp
 compile_commands.json
-compile_flags.txt
+
