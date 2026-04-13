@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 
-#include <CrawlGen/configtypes.hpp>
+#include <crawlgen/configtypes.hpp>
 
 namespace CrawlGen {
 
@@ -26,7 +26,7 @@ namespace CrawlGen {
             Compilertype compiler = Compilertype::GCC;
             
         public:
-            Config(std::vector<std::string> argv);
+            Config(std::vector<std::string> &argv);
             
             std::vector<std::string> get_librarys();
             bool isLibrary();
