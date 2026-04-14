@@ -31,11 +31,11 @@ namespace ArgParser {
         public:
             Parser();
 
-            int add_validArgument(std::string argName, std::string argDefinition, bool required = false);
+            bool add_validArgument(std::string argName, std::string argDefinition, bool required = false);
             bool rem_validArgument(std::string argName);
             const std::map<std::string, ValidArgumentType>& get_validArguments() const;
             
-            bool add_argument(std::string arg);
+            void add_argument(const std::string& arg);
             int search_argument(std::string arg) const;
             bool rem_argument(size_t idx);
             const std::vector<std::string>& get_arguments() const;
@@ -43,6 +43,8 @@ namespace ArgParser {
             const std::vector<std::pair<std::string, std::string>>& get_parsedArguments() const;
 
             const std::pair<ErrorType, std::string>& get_error() const;
+
+            int parse();
 
     };
 
