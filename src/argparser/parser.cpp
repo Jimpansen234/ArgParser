@@ -1,9 +1,10 @@
+#include <argparser/parser.hpp>
+
 #include <vector>
 #include <map>
 #include <string>
 #include <utility>
 
-#include <argparser/parser.hpp>
 
 namespace ArgParser {
     using namespace std;
