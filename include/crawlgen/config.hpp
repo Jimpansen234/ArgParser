@@ -4,9 +4,12 @@
 #include <vector>
 #include <string>
 
-#include <crawlgen/configtypes.hpp>
-
 namespace CrawlGen {
+
+    enum class Compilertype {
+        GCC,
+        CLANG
+    };
 
     class Config {
         private:
