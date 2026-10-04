@@ -1,40 +1,48 @@
 #include <argparser/parser.hpp>
 
 #include <vector>
-#include <map>
 #include <string>
-#include <utility>
-
 
 namespace ArgParser {
     using namespace std;
     
-    Parser::Parser() : error(ErrorType::NO_ERROR, "") {
+    Parser::Parser() {
     }
 
     // operations with member "validArguments"
     bool Parser::add_validArgument(
-            string argName, string argDefinition, bool required) {
+            string argName, vector<string> argFlags, 
+            bool isBoolFlag, bool required) {
 
-        if(this->validArguments.contains(argName)) {
+        if(this->search_validArgument(argName) != -1) {
             return false;
         }
-        ValidArgumentType argument;
-        argument.argDefinition = argDefinition;
+        ValidArgument argument;
+        argument.isBoolFlag = isBoolFlag;
+        argument.flags = argFlags;
+        argument.name = argName;
         argument.required = required;
-        this->validArguments[argName] = argument;
+        this->validArguments.push_back(argument);
         return true;
     }
 
-    bool Parser::rem_validArgument(string argName) {
-        if(!this->validArguments.contains(argName)) {
-            return false;
+    int Parser::search_validArgument(string argName) const {
+        int i = 0;
+        for(const auto &x: this->validArguments) {
+            if(x.name == argName) {
+                return i;
+            }
+            i++;
         }
-        this->validArguments.erase(argName);
+        return -1;
+    }
+
+    bool Parser::rem_validArgument(size_t idx) {
+        validArguments.erase(validArguments.begin() + idx); 
         return true;
     }
 
-    const map<string, ValidArgumentType>& Parser::get_validArguments() const {
+    const vector<ValidArgument>& Parser::get_validArguments() const {
         return this->validArguments;
     }
 
@@ -46,11 +54,9 @@ namespace ArgParser {
 
     int Parser::search_argument(string arg) const {
         int i = 0;
-        for(const auto x: this->arguments) {
+        for(const auto &x: this->arguments) {
             if(x == arg) {
-               if(x == arg) {
-                   return i;
-               } 
+                return i;
             }
             i++;
         }
@@ -70,18 +76,19 @@ namespace ArgParser {
     }
 
     // getter for member "parsedArguments"
-    const vector<pair<string, string>>& Parser::get_parsedArguments() const {
+    const vector<ParsedArgument>& Parser::get_parsedArguments() const {
         return this->parsedArguments;
     }
 
     // getter for member "error"
-    const pair<ErrorType, string>& Parser::get_error() const {
+    const Error& Parser::get_error() const {
         return this->error;
     }
 
     // parse method
-    int Parser::parse() {
+    bool Parser::parse() {
         //TODO implementation of "parse" method
+        
     }
 
 }
