@@ -9,6 +9,7 @@ namespace ArgParser {
     enum class ErrorType {
         NO_ERROR,
         INVALID_ARGUMENT, 
+        NO_ARGUMENTS,
         MISSING_OPTION,
         MISSING_REQUIRED_ARGUMENT
         
@@ -39,22 +40,29 @@ namespace ArgParser {
             Error error;
 
             std::vector<ParsedArgument> parsedArguments;
+
         public:
+            // deletion of the copy constructor
+            Parser(Parser &copy) = delete;
+            Parser& operator=(const Parser &copy) = delete;
+
             Parser();
 
             bool add_validArgument(std::string argName, 
                     std::vector<std::string> argFlags, 
                     bool isBoolFlag = false, bool required = false);
-            int search_validArgument(std::string argName) const;
+            int searchByName_validArgument(const std::string &argName) const;
+            int searchByFlag_validArgument(const std::string &flag) const;
             bool rem_validArgument(size_t idx);
             const std::vector<ValidArgument>& get_validArguments() const;
             
-            void add_argument(const std::string& arg);
-            int search_argument(std::string arg) const;
+            void add_argument(const std::string &arg);
+            int search_argument(const std::string &arg) const;
             bool rem_argument(size_t idx);
             const std::vector<std::string>& get_arguments() const;
 
             const std::vector<ParsedArgument>& get_parsedArguments() const;
+            int search_parsedArgument(const std::string &argName) const;
 
             const Error& get_error() const;
 

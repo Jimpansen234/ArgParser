@@ -14,7 +14,7 @@ namespace ArgParser {
             string argName, vector<string> argFlags, 
             bool isBoolFlag, bool required) {
 
-        if(this->search_validArgument(argName) != -1) {
+        if(this->searchByName_validArgument(argName) != -1) {
             return false;
         }
         ValidArgument argument;
@@ -26,11 +26,24 @@ namespace ArgParser {
         return true;
     }
 
-    int Parser::search_validArgument(string argName) const {
+    int Parser::searchByName_validArgument(const string &argName) const {
         int i = 0;
         for(const auto &x: this->validArguments) {
             if(x.name == argName) {
                 return i;
+            }
+            i++;
+        }
+        return -1;
+    }
+
+    int Parser::searchByFlag_validArgument(const string &flag) const {
+        int i = 0;
+        for(const auto &x: this->validArguments) {
+            for(const auto &y: x.flags) {
+                if(y == flag) {
+                    return i;
+                }
             }
             i++;
         }
@@ -52,7 +65,7 @@ namespace ArgParser {
        return;
     }
 
-    int Parser::search_argument(string arg) const {
+    int Parser::search_argument(const string &arg) const {
         int i = 0;
         for(const auto &x: this->arguments) {
             if(x == arg) {
@@ -80,6 +93,16 @@ namespace ArgParser {
         return this->parsedArguments;
     }
 
+    int Parser::search_parsedArgument(const string &argName) const {
+        int i = 0;
+        for(const auto &x: this->parsedArguments) {
+            if(x.name == argName) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     // getter for member "error"
     const Error& Parser::get_error() const {
         return this->error;
@@ -87,8 +110,57 @@ namespace ArgParser {
 
     // parse method
     bool Parser::parse() {
-        //TODO implementation of "parse" method
+        for(int i = 0; i < this->arguments.size(); i++) {
+            int validArgIndex = this->searchByFlag_validArgument(this->arguments[i]);
+            if(validArgIndex == -1) {
+                Error &err = this->error;
+                err.type = ErrorType::INVALID_ARGUMENT;
+                err.argument = this->arguments[i];
+                return false;
+            }
+            const ValidArgument &validArg = this->validArguments[validArgIndex];
+            ParsedArgument parsedArg;
+            parsedArg.name = validArg.name;
+            if(validArg.isBoolFlag) {
+                parsedArg.value = true;
+            } else {
+                if(this->arguments.size() <= i+1) {
+                    Error &err = this->error;
+                    err.type= ErrorType::MISSING_OPTION;
+                    err.argument = this->arguments[i];
+                    return false;
+                }
+                parsedArg.value = this->arguments[i+1];
+                i++;
+            }
+            this->parsedArguments.push_back(parsedArg);
+        }
         
+        vector<string> requiredArguments;
+        for(const auto &x: this->validArguments) {
+            // making a list of all required arguments
+            if(x.required) {
+                requiredArguments.push_back(x.name);
+            }
+
+        }
+
+        for(const auto &x: requiredArguments) {
+            if(search_parsedArgument(x) == -1) {
+                Error &err = this->error;
+                err.argument = x;
+                err.type = ErrorType::MISSING_REQUIRED_ARGUMENT;
+                return false;
+            }
+        }
+
+        if(this->arguments.empty()) {
+            Error &err = this->error;
+            err.argument = "";
+            err.type = ErrorType::NO_ARGUMENTS;
+            return false;
+        }
+        return true;
     }
 
 }
