@@ -151,6 +151,7 @@ namespace ArgParser {
                 int validArgIndex;
                 int j;
                 ValidArgument validArg;
+                bool boolflag;
                  
                 for(j = 0;j < argument.size();j++) {
                     const char &c = argument[j];
@@ -161,7 +162,7 @@ namespace ArgParser {
                     }
                     
                     validArg = this->validArguments[validArgIndex];
-                    bool boolflag = validArg.isBoolFlag;
+                    boolflag = validArg.isBoolFlag;
                     name = validArg.name;
                     if(boolflag) {
                         value = "true";
@@ -176,19 +177,22 @@ namespace ArgParser {
 
                 }
 
-                if(j < argument.size()-1) {
-                    value = argument.substr(j+1);
-                } else if(i < this->arguments.size()) {
-                    value = this->arguments[i+1];
-                    i++;
-                } else {
-                    set_error(ErrorType::MISSING_OPTION, "-" + string(1,argument[j-1]));
-                    return false;
+                if(!boolflag) {
+                    if(j < argument.size()-1) {
+                        value = argument.substr(j+1);
+                    } else if(i < this->arguments.size()-1) {
+                        value = this->arguments[i+1];
+                        i++;
+                    } else {
+                        set_error(ErrorType::MISSING_OPTION, "-" + string(1,argument[j-1]));
+                        return false;
+                    }
+                
+                    ParsedArgument parsedArg;
+                    parsedArg.value = value;
+                    parsedArg.name = name;
+                    this->parsedArguments.push_back(parsedArg);
                 }
-                ParsedArgument parsedArg;
-                parsedArg.value = value;
-                parsedArg.name = name;
-                this->parsedArguments.push_back(parsedArg);
 
             } else if(argument[0] == '-' && argument[1] == '-') {
                 if(argument.size() == 2) {
