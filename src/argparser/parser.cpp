@@ -120,6 +120,7 @@ namespace ArgParser {
             if(x.name == argName) {
                 return i;
             }
+            i++;
         }
         return -1;
     }
