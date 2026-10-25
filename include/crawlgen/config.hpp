@@ -8,28 +8,32 @@ namespace CrawlGen {
 
     enum class Compilertype {
         GCC,
-        CLANG
+        CLANG,
+        MSVC
     };
 
     class Config {
         private:
-            std::vector<std::string> argv;
             std::vector<std::string> librarys;
 
             bool islib = false;
             bool useasm = false;
             bool haslibs = false;
+            bool isMinGW = false;
+            bool isMinGW_w64= false;
 
             std::string sourcePath = "./src";
             std::string objectsPath = "./obj";
             std::string outputPath = "./out";
             std::string includePath = "./include";
+            std::string libpath = "./lib";
             std::string asmPath = "./asm";
+            std::string shell = "/bin/sh";
 
             Compilertype compiler = Compilertype::GCC;
             
         public:
-            Config(std::vector<std::string> &argv);
+            Config();
             
             std::vector<std::string> get_librarys();
             bool isLibrary();

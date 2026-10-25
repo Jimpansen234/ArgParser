@@ -21,7 +21,8 @@ namespace ArgParser {
     };
 
     struct ValidArgument {
-        std::vector<std::string> flags;
+        std::string shortFlag = "";
+        std::string longFlag = "";
         std::string name;
         bool isBoolFlag;
         bool required;
@@ -41,6 +42,8 @@ namespace ArgParser {
 
             std::vector<ParsedArgument> parsedArguments;
 
+            void set_error(ErrorType type, const std::string &arg);
+
         public:
             // deletion of the copy constructor
             Parser(Parser &copy) = delete;
@@ -49,10 +52,11 @@ namespace ArgParser {
             Parser();
 
             bool add_validArgument(std::string argName, 
-                    std::vector<std::string> argFlags, 
+                    std::string shortFlag, std::string longFlag = "", 
                     bool isBoolFlag = false, bool required = false);
             int searchByName_validArgument(const std::string &argName) const;
-            int searchByFlag_validArgument(const std::string &flag) const;
+            int searchByShortFlag_validArgument(const std::string &flag) const;
+            int searchByLongFlag_validArgument(const std::string &flag) const;
             bool rem_validArgument(size_t idx);
             const std::vector<ValidArgument>& get_validArguments() const;
             
