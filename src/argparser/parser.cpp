@@ -184,7 +184,7 @@ namespace ArgParser {
                         value = this->arguments[i+1];
                         i++;
                     } else {
-                        set_error(ErrorType::MISSING_OPTION, "-" + string(1,argument[j-1]));
+                        set_error(ErrorType::MISSING_OPTION, "-" + string(1,argument[j]));
                         return false;
                     }
                 
