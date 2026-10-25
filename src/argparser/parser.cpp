@@ -1,3 +1,12 @@
+/**
+ * Copyright (c) 2026 Jerome Alexander Korf (Github: Jimpansen234)
+ *
+ * This project is licensed under the GNU LGPL v3.0
+ * with the SPDX-identifier: LGPL-3.0-or-later WITH LGPL-3.0-linking-exception
+ *
+ * Full exception terms ale provided in the LICENSE file at the root
+ */
+
 #include <argparser/parser.hpp>
 
 #include <vector>
