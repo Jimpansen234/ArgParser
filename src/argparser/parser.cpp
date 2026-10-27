@@ -14,7 +14,10 @@
 #include <string_view>
 
 namespace ArgParser {
-    using namespace std;
+    
+    using std::string;
+    using std::string_view;
+    using std::vector;
 
     void Parser::set_error(ErrorType type, const string &arg) {
         Error &err = this->error;

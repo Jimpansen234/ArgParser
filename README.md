@@ -37,8 +37,8 @@ consists of the 2 values `std::string name` and `std::string value`.
 The name will be what you have defined as `argName` and the value the coresponding value that was passed in the commandline.
 
 ## 5. About my coding
-Please don't hate me, because I used `using namespace std;` in my parser.cpp.
-It doesn't affect your code in any way, as I didn't write that line in my parser.hpp.
+I have to say, that you will find in the history in the src/ArgParser/parser.cpp the line "using namespace std;".
+I don't use it anymore and replaced it with three dedicated lines. I didn't and I am not going to add any of those lines to any headerfile.
 
 ## 6. Licensing
 I am Licensing this project to the general public under the terms of the GNU LGPL v3.0 with a static linking exception.
