@@ -14,7 +14,28 @@ I am too lazy to rewrite a parsing mechanism every time in the main, so I made t
 Well: This project told me 'why' you should write a documentation and what happens if you don't,
 so there is no documentation.
 
-## 4. How to use:
+## 4. What it does:
+As you might or might not know, the POSIX and GNU standards for commandline flags are way more complicated than just "in front of each flag there is a '-' and if the flag is a long flag it has to start with '--'"
+
+This ArgParser parses All of them (at least, all I know of). It is easier to write an example.
+
+### Definitions for the example:
+```
+Flag A (bool) := -a, --boolflaga
+Flag B (bool) := -b, --boolflagb
+Flag Reg1 (string) := -1, --reg1
+Flag Reg2 (string) := -2, --reg2
+```
+
+### The Example:
+If you only want to use one flag it is easy. For bool it would just be `-a` or `--boolflaga` right? What if you want explicitly NOT set flag A? The standard says `--no-boolflaga`. My Parser Accepts this
+but it also accepts `--boolflaga=false`. This is not in the standard, but some users (including me unti I wrote this parser) simply don't know about `--no-boolflaga`.
+
+And for Regular non-boolean flags? It should be `-1 <val>` or `--reg1 <val>` but also correct would be `-1<val>`, `--reg1=<val>`.
+
+It becomes complicated when you want to use multiple flags. Ituitively you would think of `-a -b -1 <val>` but also possible would be `-ab -1 <val>` and even `-ab1 <val>` and `-ab1<val>` the most uncomplicatd thing would be the use of long flags, since they are not clusterable;
+
+## 5. How to use:
 As of now, you have to compile this by yourself with a buildsystem of your choice.
 The ArgParser namespace has a class "Parser".
 You instantiate an object of this class with the default constructor `ArgParser::Parser::Parser()`.
@@ -35,10 +56,6 @@ If the return value of the parsing is true, then you may look into the `ArgParse
 The vector consists of the type `ArgParser::ParsedArgument`. Every parsed argument
 consists of the 2 values `std::string name` and `std::string value`.
 The name will be what you have defined as `argName` and the value the coresponding value that was passed in the commandline.
-
-## 5. About my coding
-I have to say, that you will find in the history in the src/ArgParser/parser.cpp the line "using namespace std;".
-I don't use it anymore and replaced it with three dedicated lines. I didn't and I am not going to add any of those lines to any headerfile.
 
 ## 6. Licensing
 I am Licensing this project to the general public under the terms of the GNU LGPL v3.0 with a static linking exception.
