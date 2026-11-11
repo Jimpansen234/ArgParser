@@ -17,7 +17,7 @@ so there is no documentation.
 ## 4. What it does:
 As you might or might not know, the POSIX and GNU standards for commandline flags are way more complicated than just "in front of each flag there is a '-' and if the flag is a long flag it has to start with '--'"
 
-This ArgParser parses All of them (at least, all I know of). It is easier to write an example.
+This ArgParser parses ALL of them (at least, all I know of). It is easier to write an example.
 
 ### Definitions for the example:
 ```
