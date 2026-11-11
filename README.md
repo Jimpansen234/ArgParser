@@ -40,7 +40,7 @@ As of now, you have to compile this by yourself with a buildsystem of your choic
 The ArgParser namespace has a class "Parser".
 You instantiate an object of this class with the default constructor `ArgParser::Parser::Parser()`.
 
-Then you feed your so called "validArguments" into the parser using the `ArgParser::Parser::add_validArgument(std::string argName, std::string shortFlag, std::stringlongFlag = "", bool isBoolFlag = false, bool required = false)` method.
+Then you feed your so called "validArguments" into the parser using the `ArgParser::Parser::add_validArgument(std::string argName, std::string shortFlag, std::stringLongFlag = "", bool isBoolFlag = false, bool required = false)` method.
 
 To parse the inline arguments, the parser also needs the arguments itself.
 you can add them using the `ArgParser::Parser::add_argument(const std::string &arg)` method.
