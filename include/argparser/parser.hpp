@@ -51,11 +51,11 @@ namespace ArgParser {
 
             std::vector<ParsedArgument> parsedArguments;
 
-            void set_error(ErrorType type, const std::string &arg);
+            void set_error(ErrorType type, std::string_view arg);
 
         public:
             // deletion of the copy constructor
-            Parser(Parser &copy) = delete;
+            Parser(const Parser &copy) = delete;
             Parser& operator=(const Parser &copy) = delete;
 
             Parser();
@@ -63,19 +63,19 @@ namespace ArgParser {
             bool add_validArgument(std::string argName, 
                     std::string shortFlag, std::string longFlag = "", 
                     bool isBoolFlag = false, bool required = false);
-            int searchByName_validArgument(const std::string &argName) const;
-            int searchByShortFlag_validArgument(const std::string &flag) const;
-            int searchByLongFlag_validArgument(const std::string &flag) const;
+            int searchByName_validArgument(std::string_view argName) const;
+            int searchByShortFlag_validArgument(std::string_view flag) const;
+            int searchByLongFlag_validArgument(std::string_view flag) const;
             bool rem_validArgument(size_t idx);
             const std::vector<ValidArgument>& get_validArguments() const;
             
             void add_argument(const std::string &arg);
-            int search_argument(const std::string &arg) const;
+            int search_argument(std::string_view arg) const;
             bool rem_argument(size_t idx);
             const std::vector<std::string>& get_arguments() const;
 
             const std::vector<ParsedArgument>& get_parsedArguments() const;
-            int search_parsedArgument(const std::string &argName) const;
+            int search_parsedArgument(std::string_view argName) const;
 
             const Error& get_error() const;
 

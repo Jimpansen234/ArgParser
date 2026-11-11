@@ -19,7 +19,7 @@ namespace ArgParser {
     using std::string_view;
     using std::vector;
 
-    void Parser::set_error(ErrorType type, const string &arg) {
+    void Parser::set_error(ErrorType type,  string_view arg) {
         Error &err = this->error;
         err.type = type;
         err.argument = arg;
@@ -50,7 +50,7 @@ namespace ArgParser {
         return true;
     }
 
-    int Parser::searchByName_validArgument(const string &argName) const {
+    int Parser::searchByName_validArgument( string_view argName) const {
         int i = 0;
         for(const auto &x: this->validArguments) {
             if(x.name == argName) {
@@ -61,7 +61,7 @@ namespace ArgParser {
         return -1;
     }
 
-    int Parser::searchByShortFlag_validArgument(const string &flag) const {
+    int Parser::searchByShortFlag_validArgument( string_view flag) const {
         int i = 0;
         for(const auto &x: this->validArguments) {
             if(x.shortFlag == flag) {
@@ -72,7 +72,7 @@ namespace ArgParser {
         return -1;
     }
 
-    int Parser::searchByLongFlag_validArgument(const string &flag) const {
+    int Parser::searchByLongFlag_validArgument( string_view flag) const {
         int i = 0;
         for(const auto &x: this->validArguments) {
             if(x.longFlag == flag) {
@@ -93,12 +93,12 @@ namespace ArgParser {
     }
 
     // operations with member "arguments"
-    void Parser::add_argument(const string& arg) {
+    void Parser::add_argument(const string &arg) {
        this->arguments.push_back(arg);
        return;
     }
 
-    int Parser::search_argument(const string &arg) const {
+    int Parser::search_argument( string_view arg) const {
         int i = 0;
         for(const auto &x: this->arguments) {
             if(x == arg) {
@@ -126,7 +126,7 @@ namespace ArgParser {
         return this->parsedArguments;
     }
 
-    int Parser::search_parsedArgument(const string &argName) const {
+    int Parser::search_parsedArgument( string_view argName) const {
         int i = 0;
         for(const auto &x: this->parsedArguments) {
             if(x.name == argName) {
