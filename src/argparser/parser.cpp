@@ -127,12 +127,12 @@ namespace ArgParser {
     }
 
     int Parser::search_parsedArgument( string_view argName) const {
-        int i = 0;
-        for(const auto &x: this->parsedArguments) {
+        for(int i = this->parsedArguments.size()-1;i>=0;i--) {
+            const auto &x = this->parsedArguments[i];
             if(x.name == argName) {
                 return i;
             }
-            i++;
+
         }
         return -1;
     }
